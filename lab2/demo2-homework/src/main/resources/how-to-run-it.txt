@@ -1,0 +1,21 @@
+.\mvnw spring-boot:run -D"spring-boot.run.profiles=prod"
+.\mvnw spring-boot:run -D"spring-boot.run.profiles=dev"
+
+
+for dev
+.\mvnw spring-boot:run -D"spring-boot.run.profiles=dev"
+Expect logs:
+
+The following 1 profile is active: "dev"
+
+DB vendor: h2
+
+Customers: [Alice, Bob]
+
+Check endpoints:
+
+http://localhost:8081/hello
+
+http://localhost:8081/actuator/info (shows H2 info)
+
+http://localhost:8081/actuator/health

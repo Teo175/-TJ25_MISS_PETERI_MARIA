@@ -1,0 +1,17 @@
+server:
+  port: 8081
+
+app:
+  value: "Hello from application.yml!"
+  db:
+    # shared flags; real connection details live in profile files
+    useReplica: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,env,beans,mappings,threaddump,loggers,heapdump,dbinfo
+  endpoint:
+    health:
+      show-details: always

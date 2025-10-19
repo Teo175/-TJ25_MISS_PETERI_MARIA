@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${app.db.host}:${app.db.port}/${app.db.name}
+    username: ${app.db.user}
+    password: ${app.db.password}
+
+app:
+  db:
+    vendor: postgres
+    host: ${DB_HOST:localhost}
+    port: ${DB_PORT:5432}
+    name: ${DB_NAME:appdb}
+    user: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:dinozaur123}
+    useReplica: ${USE_REPLICA:false}  # for conditional bean demo
