@@ -1,2 +1,9 @@
-package com.example.demo.validator;public class Validation {
+package com.example.demo.validator;
+
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ValidateCustomer {
 }
