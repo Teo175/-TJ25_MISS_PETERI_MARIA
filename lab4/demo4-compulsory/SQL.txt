@@ -1,0 +1,55 @@
+-- Create tables for the university course management system
+
+CREATE TABLE IF NOT EXISTS students (
+    id BIGSERIAL PRIMARY KEY,
+    code VARCHAR(50) UNIQUE NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    year INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS instructors (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS packs (
+    id BIGSERIAL PRIMARY KEY,
+    year INTEGER NOT NULL,
+    semester INTEGER NOT NULL,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS courses (
+    id BIGSERIAL PRIMARY KEY,
+    type VARCHAR(50) NOT NULL CHECK (type IN ('COMPULSORY', 'OPTIONAL')),
+    code VARCHAR(50) UNIQUE NOT NULL,
+    abbr VARCHAR(20) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    instructor_id BIGINT,
+    pack_id BIGINT,
+    group_count INTEGER NOT NULL DEFAULT 1,
+    description TEXT,
+    CONSTRAINT fk_instructor FOREIGN KEY (instructor_id) REFERENCES instructors(id),
+    CONSTRAINT fk_pack FOREIGN KEY (pack_id) REFERENCES packs(id)
+);
+
+-- Sample data for testing
+INSERT INTO students (code, name, email, year) VALUES
+    ('STU001', 'John Doe', 'john.doe@university.edu', 1),
+    ('STU002', 'Jane Smith', 'jane.smith@university.edu', 2),
+    ('STU003', 'Bob Johnson', 'bob.johnson@university.edu', 1);
+
+INSERT INTO instructors (name, email) VALUES
+    ('Dr. Alice Brown', 'alice.brown@university.edu'),
+    ('Prof. David Wilson', 'david.wilson@university.edu');
+
+INSERT INTO packs (year, semester, name) VALUES
+    (1, 1, 'First Year Optional Pack A'),
+    (2, 1, 'Second Year Optional Pack B');
+
+INSERT INTO courses (type, code, abbr, name, instructor_id, pack_id, group_count, description) VALUES
+    ('COMPULSORY', 'CS101', 'INTRO', 'Introduction to Computer Science', 1, NULL, 3, 'Fundamental concepts of programming'),
+    ('OPTIONAL', 'CS201', 'WEB', 'Web Development', 2, 1, 2, 'HTML, CSS, JavaScript fundamentals'),
+    ('OPTIONAL', 'CS202', 'MOBILE', 'Mobile Development', 1, 1, 2, 'Android and iOS development basics');
