@@ -1,4 +1,3 @@
-// src/main/java/com/example/demo/boot/StartupRunner.java
 package com.example.demo;
 
 import com.example.demo.config.DatabaseProperties;

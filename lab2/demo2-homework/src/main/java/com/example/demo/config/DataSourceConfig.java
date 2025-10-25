@@ -1,4 +1,3 @@
-// src/main/java/com/example/demo/config/DataSourceConfig.java
 package com.example.demo.config;
 
 import com.zaxxer.hikari.HikariConfig;
@@ -37,18 +36,16 @@ public class DataSourceConfig {
         return new HikariDataSource(cfg);
     }
 
-    // PROD: replica (picked when app.db.useReplica=true)
+    // PROD: replica
     @Bean
     @Profile("prod")
     @ConditionalOnExpression("${app.db.useReplica:false}")
     public DataSource prodReplicaDataSource(DatabaseProperties props) {
         HikariConfig cfg = new HikariConfig();
         cfg.setDriverClassName("org.postgresql.Driver");
-        // example: same host/port/name—replace with real replica host if you have one
         cfg.setJdbcUrl(String.format("jdbc:postgresql://%s:%d/%s", props.getHost(), props.getPort(), props.getName()));
         cfg.setUsername(props.getUser());
         cfg.setPassword(props.getPassword());
-        // tag pool name for visibility
         cfg.setPoolName("replica-ds");
         return new HikariDataSource(cfg);
     }

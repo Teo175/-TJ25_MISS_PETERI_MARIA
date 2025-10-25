@@ -43,7 +43,7 @@ public class DatabaseInfoContributor implements InfoContributor {
                             "version", version,
                             "user", props.getUser(),
                             "activeProfile", String.join(",", org.springframework.core.env.AbstractEnvironment
-                                    .ACTIVE_PROFILES_PROPERTY_NAME.split("")), // keep minimal; profile is obvious from env too
+                                    .ACTIVE_PROFILES_PROPERTY_NAME.split("")),
                             "customersCount", count
                     )
             );

@@ -1,7 +1,6 @@
 .\mvnw spring-boot:run -D"spring-boot.run.profiles=prod"
 .\mvnw spring-boot:run -D"spring-boot.run.profiles=dev"
 
-
 for dev
 .\mvnw spring-boot:run -D"spring-boot.run.profiles=dev"
 Expect logs:
